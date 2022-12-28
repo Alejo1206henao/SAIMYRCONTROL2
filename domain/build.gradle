@@ -1,0 +1,22 @@
+dependencies {
+    // Spring
+    implementation 'org.springframework.boot:spring-boot-starter'
+
+    // Lombok
+    api "org.projectlombok:lombok:${lombokVersion}"
+}
+
+bootJar {
+    enabled = false
+}
+
+bootRun {
+    enabled = false
+}
+
+jar {
+    enabled = true
+    manifest {
+        attributes 'Implementation-Title': 'domain'
+    }
+}

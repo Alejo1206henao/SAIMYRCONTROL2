@@ -1,0 +1,28 @@
+dependencies {
+    // Projects
+    api project(":domain")
+    api project(":persistence")
+
+    // Spring Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // Spring Web
+    implementation ('org.springframework.boot:spring-boot-starter-web') {
+        exclude module: 'spring-boot-starter-tomcat'
+    }
+
+    implementation 'org.springframework.boot:spring-boot-starter-undertow'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+    // Swagger
+    implementation 'io.springfox:springfox-swagger2:2.9.2', 'io.springfox:springfox-swagger-ui:2.9.2'
+}
+
+bootJar {
+    enabled = true
+    archiveFileName = "${appName}-${appVersion}.jar"
+}
+
+bootRun {
+    enabled = true;
+}

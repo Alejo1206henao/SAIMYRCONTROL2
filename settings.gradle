@@ -1,0 +1,5 @@
+rootProject.name = 'SAIMYR - CONTROL'
+
+include 'web'
+include 'domain'
+include 'persistence'

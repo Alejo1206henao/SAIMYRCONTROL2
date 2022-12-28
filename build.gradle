@@ -1,0 +1,68 @@
+plugins {
+	id 'idea'
+	id 'java-library'
+	id 'org.springframework.boot' version "${springBoot}"
+	id 'io.spring.dependency-management' version "${dependencyManagement}"
+}
+
+allprojects {
+	group = 'co.com.saimyr'
+	version = "${appVersion}"
+	sourceCompatibility = '11'
+
+	repositories {
+		mavenCentral()
+	}
+}
+
+subprojects {
+	apply plugin: 'org.springframework.boot'
+	apply plugin: 'io.spring.dependency-management'
+	apply plugin: 'java-library'
+	apply plugin: 'java'
+
+	test {
+		useJUnitPlatform()
+	}
+
+	dependencies {
+		// Spring Test
+		testImplementation('org.springframework.boot:spring-boot-starter-test') {
+			exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+		}
+
+		// Lombok
+		annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+		//mapStruct
+		implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+
+		annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+
+		// Log4j
+		implementation 'org.apache.logging.log4j:log4j-api', 'org.apache.logging.log4j:log4j-core'
+
+
+	}
+
+	tasks.withType(JavaCompile) {
+		options.encoding = 'UTF-8'
+	}
+}
+
+bootJar {
+	enabled = false
+}
+
+bootRun {
+	enabled = false
+}
+
+idea {
+	module {
+		excludeDirs = [file(".gradle"), file("gradle"), file(".idea"), file("build")]
+		["classes", "docs", "dependency-cache", "libs", "reports", "resources", "test-results", "tmp"].each {
+			excludeDirs << file("$buildDir/$it")
+		}
+	}
+}
