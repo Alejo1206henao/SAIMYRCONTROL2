@@ -1,7 +1,8 @@
 package co.com.saimyr.web.controller;
 
-import co.com.saimyr.domain.Factura;
+import co.com.saimyr.domain.SmrBill;
 import co.com.saimyr.domain.SmrAdmBill;
+import co.com.saimyr.domain.dto.SmrAdmBillDTO;
 import co.com.saimyr.domain.service.SmrAdmBillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("public/api/control")
+@RequestMapping("/public/api/control")
 public class SaimyrAdmBillController {
     private final SmrAdmBillService smrAdmBillService;
 
@@ -27,25 +28,25 @@ public class SaimyrAdmBillController {
         return smrAdmBillService.getAll();
     }
 
-    @GetMapping("/getId/{smrNumber}")
-    public List<SmrAdmBill> getById(@PathVariable("smrNumber") String smrNumber){
-        return smrAdmBillService.getById(smrNumber);
-    }
-
-    @GetMapping("/getDate/{date}")
-    public List<SmrAdmBill> getByDate (@PathVariable("date") LocalDate date){
-        return smrAdmBillService.getByDate(date);
-    }
-
-    @GetMapping("/getStatu/{statu}")
-    public Optional<List<SmrAdmBill>> getByStatu (@PathVariable("statu") String statu){
-        return smrAdmBillService.getByStatu(statu);
-    }
+//    @GetMapping("/getId/{smrNumber}")
+//    public List<SmrAdmBill> getById(@PathVariable("smrNumber") String smrNumber){
+//        return smrAdmBillService.getById(smrNumber);
+//    }
+//
+//    @GetMapping("/getDate/{date}")
+//    public List<SmrAdmBill> getByDate (@PathVariable("date") LocalDate date){
+//        return smrAdmBillService.getByDate(date);
+//    }
+//
+//    @GetMapping("/getStatu/{statu}")
+//    public Optional<List<SmrAdmBill>> getByStatu (@PathVariable("statu") String statu){
+//        return smrAdmBillService.getByStatu(statu);
+//    }
 
 
     @PostMapping("/save")
-    public ResponseEntity<List<SmrAdmBill>> save (@RequestBody List<Factura> facturas){
-        return new ResponseEntity<>(smrAdmBillService.save(facturas), HttpStatus.CREATED);
+    public ResponseEntity<List<SmrAdmBill>> save (@RequestBody List<SmrAdmBillDTO> smrAdmBillDTOList){
+        return ResponseEntity.ok(smrAdmBillService.save(SmrAdmBill.convertToList(smrAdmBillDTOList)));
     }
 
 }

@@ -14,8 +14,6 @@ public class SaimyrAdmFacPK implements Serializable {
     @Column(name="cons_fac")
     private int consFac;
 
-    private int ano;
-
     @Column(name="cons_mpio")
     private int consMpio;
 
@@ -28,13 +26,6 @@ public class SaimyrAdmFacPK implements Serializable {
         this.consFac = consFac;
     }
 
-    public int getAno() {
-        return ano;
-    }
-
-    public void setAno(int ano) {
-        this.ano = ano;
-    }
 
     public int getConsMpio() {
         return consMpio;

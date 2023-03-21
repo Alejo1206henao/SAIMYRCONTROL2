@@ -1,23 +1,17 @@
 package co.com.saimyr.persistence;
 
-import co.com.saimyr.domain.Factura;
 import co.com.saimyr.domain.SmrAdmBill;
-import co.com.saimyr.domain.SmrAdmBillDet;
-import co.com.saimyr.domain.SmrAdmBillMvto;
 import co.com.saimyr.domain.repository.SaimyrBillRepository;
 import co.com.saimyr.persistence.crud.FacturaCrudRepository;
-import co.com.saimyr.persistence.entity.SaimyrAdmFacDet;
-import co.com.saimyr.persistence.entity.SaimyrAdmFacMvto;
 import co.com.saimyr.persistence.entity.SaimyrAdmFactura;
 import co.com.saimyr.persistence.mapper.SmrAdmBillMapper;
-import org.apache.logging.log4j.core.jackson.ListOfMapEntryDeserializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.plaf.PanelUI;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class SaimyrAdmFacImple implements SaimyrBillRepository {
@@ -57,16 +51,17 @@ public class SaimyrAdmFacImple implements SaimyrBillRepository {
 
     @Override
     public List<SmrAdmBill> save(List<SmrAdmBill> smrAdmBills) {
+        this.setNextConsecutives(smrAdmBills);
         List<SaimyrAdmFactura> saimyrAdmFacturas = mapper.toSaimyrAdmFacturaList(smrAdmBills);
         return mapper.toSmrAdmBills(facturaCrudRepository.saveAll(saimyrAdmFacturas));
     }
 
-    private List<SmrAdmBill> toCountConsFac(List<SmrAdmBill> smrAdmBillList) {
-        int maxiBillFac = (int) facturaCrudRepository.getMaxControlId();
-        for (int i = 0; i < smrAdmBillList.size(); i++) {
-            smrAdmBillList.get(i).setConsBill(maxiBillFac);
-            maxiBillFac++;
-        }
-        return smrAdmBillList;
+    private void setNextConsecutives(List<SmrAdmBill> smrAdmBillList) {
+        AtomicInteger maxiBillFac = new AtomicInteger((int) facturaCrudRepository.getMaxControlId());
+        smrAdmBillList.forEach(detail -> {
+            if (detail.getConsBill() == 0) {
+                detail.setConsBill(maxiBillFac.getAndIncrement());
+            }
+        });
     }
 }

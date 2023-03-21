@@ -20,8 +20,6 @@ public class SaimyrAdmFactura {
 
     @Column(name="smr_numero")
     private String smrNumero;
-
-    private int identificacion;
     private String nombre;
     private LocalDate fecha;
 
@@ -51,14 +49,6 @@ public class SaimyrAdmFactura {
 
     public void setSmrNumero(String smrNumero) {
         this.smrNumero = smrNumero;
-    }
-
-    public int getIdentificacion() {
-        return identificacion;
-    }
-
-    public void setIdentificacion(int identificacion) {
-        this.identificacion = identificacion;
     }
 
     public String getNombre() {

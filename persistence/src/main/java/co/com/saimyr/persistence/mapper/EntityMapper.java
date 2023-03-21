@@ -1,6 +1,6 @@
 package co.com.saimyr.persistence.mapper;
 
-import co.com.saimyr.domain.dto.EntityDto;
+import co.com.saimyr.domain.dto.EntityDTO;
 import co.com.saimyr.persistence.entity.SaimyrGttMunicipioCodigo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -14,6 +14,6 @@ public interface EntityMapper {
     @Mapping(source = "direccion", target = "address")
     @Mapping(source = "telefono", target = "phone")
     @Mapping(source = "mail", target = "email")
-    EntityDto toEntity(SaimyrGttMunicipioCodigo municipio);
+    EntityDTO toEntity(SaimyrGttMunicipioCodigo municipio);
 }
 

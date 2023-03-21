@@ -3,7 +3,7 @@ package co.com.saimyr.domain.dto;
 import lombok.Data;
 
 @Data
-public class EntityDto {
+public class EntityDTO {
     private int entityId;
     private String nit;
     private String name;

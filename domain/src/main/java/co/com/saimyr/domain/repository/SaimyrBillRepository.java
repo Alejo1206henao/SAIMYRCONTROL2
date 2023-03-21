@@ -1,7 +1,6 @@
 package co.com.saimyr.domain.repository;
 
 
-import co.com.saimyr.domain.Factura;
 import co.com.saimyr.domain.SmrAdmBill;
 
 import java.time.LocalDate;

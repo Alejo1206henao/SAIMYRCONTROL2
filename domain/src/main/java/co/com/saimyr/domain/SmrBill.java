@@ -3,9 +3,10 @@ package co.com.saimyr.domain;
 import lombok.Data;
 
 @Data
-public class Factura {
+public class SmrBill {
     private int consMpio;
     private  int idElectronico;
+    private  int CodigoVerificacion;
     private String numero;
     private int identificacion;
     private String nombre;

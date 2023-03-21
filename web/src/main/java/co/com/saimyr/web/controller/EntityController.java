@@ -1,11 +1,10 @@
 package co.com.saimyr.web.controller;
 
-import co.com.saimyr.domain.dto.EntityDto;
+import co.com.saimyr.domain.dto.EntityDTO;
 import co.com.saimyr.domain.service.EntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +19,7 @@ public class EntityController {
     }
 
     @GetMapping
-    public ResponseEntity<EntityDto> get() {
+    public ResponseEntity<EntityDTO> get() {
         return ResponseEntity.ok(entityService.get());
     }
 }

@@ -1,15 +1,15 @@
 package co.com.saimyr.domain.service;
 
-import co.com.saimyr.domain.Factura;
+import co.com.saimyr.domain.SmrBill;
 import co.com.saimyr.domain.SmrAdmBill;
 import co.com.saimyr.domain.SmrAdmBillDet;
-import co.com.saimyr.domain.SmrAdmBillMvto;
 import co.com.saimyr.domain.repository.SaimyrBillDetRepository;
 import co.com.saimyr.domain.repository.SaimyrBillMvtoRepository;
 import co.com.saimyr.domain.repository.SaimyrBillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,6 @@ import java.util.Optional;
 public class SmrAdmBillService {
 
     private static final String VIGENTE = "V";
-
     private final SaimyrBillRepository saimyrBillRepository;
     private final SaimyrBillDetRepository saimyrBillDetRepository;
     private final SaimyrBillMvtoRepository saimyrBillMvtoRepository;
@@ -47,10 +46,14 @@ public class SmrAdmBillService {
         return saimyrBillRepository.getByStatu(statu);
     }
 
-    public List<SmrAdmBill> save (List<Factura> facturas){
-        //saimyrBillDetRepository.save(this.buildAdmBillDet(facturas));
-        return saimyrBillRepository.save(this.buildAdmBill(facturas));
+    @Transactional
+    public List<SmrAdmBill> save (List<SmrAdmBill> smrAdmBills){
+        //saimyrBillDetRepository.save(this.buildAdmBillDet(facturas))
+        return saimyrBillRepository.save(smrAdmBills);
     }
+
+
+
 
 
 //    public List<SmrAdmBillMvto> buidAdmBillMvto (List<Factura> facturaList){
@@ -67,38 +70,5 @@ public class SmrAdmBillService {
 //        }
 //        return billMvtos;
 //    }
-
-
-    public List<SmrAdmBill> buildAdmBill (List<Factura> facturaList){
-        List<SmrAdmBill> bills = new ArrayList<>();
-        for (Factura factura: facturaList) {
-            SmrAdmBill smrAdmBill = new SmrAdmBill();
-            smrAdmBill.setConsMpio(factura.getConsMpio());
-            smrAdmBill.setYear(2022);
-            smrAdmBill.setIdElectronic(factura.getIdElectronico());
-            smrAdmBill.setSmrNumber(factura.getNumero());
-            smrAdmBill.setNumberId(factura.getIdentificacion());
-            smrAdmBill.setName(factura.getNombre());
-            smrAdmBill.setStatu(VIGENTE);
-            smrAdmBill.setTotal(factura.getTotal());
-            bills.add(smrAdmBill);
-        }
-        return bills;
-    }
-
-    public List<SmrAdmBillDet> buildAdmBillDet (List<Factura> facturaList) {
-        List<SmrAdmBillDet> billDets = new ArrayList<>();
-        for (Factura factura: facturaList) {
-            SmrAdmBillDet admBillDet = new SmrAdmBillDet();
-            admBillDet.setGift(factura.getRegalo());
-            admBillDet.setUnitValue(factura.getValorUnitario());
-            admBillDet.setTax(factura.getImpuestos());
-            admBillDet.setGrossValue(factura.getValorBruto());
-            admBillDet.setTotal(factura.getTotal());
-            billDets.add(admBillDet);
-        }
-
-        return billDets;
-    }
 
 }

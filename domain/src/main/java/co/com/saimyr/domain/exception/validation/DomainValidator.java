@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class DomainValidator {
+public class  DomainValidator {
     public static final String LETTERS_ONLY_PATTERN = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ?¿ ]+$";
     public static final String NUMBERS_ONLY_PATTERN = "[0-9]+";
     public static final String NUMBERS_DECIMAL_PATTERN = "^[+-]?([0-9]+\\.?[0-9]*|\\.[0-9]+)$";

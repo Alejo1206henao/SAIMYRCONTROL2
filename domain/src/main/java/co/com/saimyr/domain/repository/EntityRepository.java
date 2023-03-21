@@ -1,8 +1,8 @@
 package co.com.saimyr.domain.repository;
 
-import co.com.saimyr.domain.dto.EntityDto;
+import co.com.saimyr.domain.dto.EntityDTO;
 
 public interface EntityRepository {
     boolean exists(long entityId);
-    EntityDto get();
+    EntityDTO get();
 }

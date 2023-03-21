@@ -11,11 +11,10 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface SmrAdmBillMapper {
+
     @Mappings({
             @Mapping(source = "id.consFac", target = "consBill"),
-            @Mapping(source = "id.ano", target = "year"),
             @Mapping(source = "id.consMpio", target = "consMpio"),
-            @Mapping(source = "identificacion", target = "numberId"),
             @Mapping(source = "nombre", target = "name"),
             @Mapping(source = "fecha", target = "date"),
             @Mapping(source = "idElectronico", target = "idElectronic"),
@@ -23,11 +22,19 @@ public interface SmrAdmBillMapper {
             @Mapping(source = "estado", target = "statu"),
             @Mapping(source = "total", target = "total")
     })
-    SmrAdmBill toSmrAdmBill(SaimyrAdmFactura saimyrAdmFactura);
-    List<SmrAdmBill> toSmrAdmBills (List<SaimyrAdmFactura> saimyrAdmFacturas);
 
-    @InheritInverseConfiguration
-    SaimyrAdmFactura toSaimyrAdmFactura (SmrAdmBill smrAdmBill);
-    List<SaimyrAdmFactura> toSaimyrAdmFacturaList (List<SmrAdmBill> smrAdmBillList);
+    //Primero el mapeo y después la invocación
+    List<SmrAdmBill> toSmrAdmBills(List<SaimyrAdmFactura> saimyrAdmFacturas);
+
+    List<SaimyrAdmFactura> toSaimyrAdmFacturaList(List<SmrAdmBill> smrAdmBills);
+
+
+
+//    SmrAdmBill toSmrAdmBill(SaimyrAdmFactura saimyrAdmFactura);
+//    List<SmrAdmBill> toSmrAdmBills (List<SaimyrAdmFactura> saimyrAdmFacturas);
+//
+//    @InheritInverseConfiguration
+//    SaimyrAdmFactura toSaimyrAdmFactura (SmrAdmBill smrAdmBill);
+//    List<SaimyrAdmFactura> toSaimyrAdmFacturaList (List<SmrAdmBill> smrAdmBillList);
 
 }

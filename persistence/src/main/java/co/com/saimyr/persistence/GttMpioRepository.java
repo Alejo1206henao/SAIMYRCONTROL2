@@ -1,6 +1,6 @@
 package co.com.saimyr.persistence;
 
-import co.com.saimyr.domain.dto.EntityDto;
+import co.com.saimyr.domain.dto.EntityDTO;
 import co.com.saimyr.domain.repository.EntityRepository;
 import co.com.saimyr.persistence.crud.CrudGttMpio;
 import co.com.saimyr.persistence.entity.SaimyrGttMunicipioCodigo;
@@ -27,7 +27,7 @@ public class GttMpioRepository implements EntityRepository {
     }
 
     @Override
-    public EntityDto get() {
+    public EntityDTO get() {
         if (gttMunicipioCodigo == null) {
             gttMunicipioCodigo = crud.findFirstBy().orElse(null);
         }

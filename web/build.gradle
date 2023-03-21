@@ -7,13 +7,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
 
     // Spring Web
-    implementation ('org.springframework.boot:spring-boot-starter-web') {
-        exclude module: 'spring-boot-starter-tomcat'
-    }
 
-    implementation 'org.springframework.boot:spring-boot-starter-undertow'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
-
+    implementation 'org.springframework.boot:spring-boot-starter-undertow'
     // Swagger
     implementation 'io.springfox:springfox-swagger2:2.9.2', 'io.springfox:springfox-swagger-ui:2.9.2'
 }
